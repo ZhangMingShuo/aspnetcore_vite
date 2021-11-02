@@ -6,3 +6,4 @@ src/vite-client/.DS_Store
 src/vite-client/dist
 src/vite-client/dist-ssr
 src/vite-client/*.local
+production

@@ -16,6 +16,13 @@ namespace ViteApi
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            //注入TestController
+            services.AddControllers();
+
+            //AddSpaStaticFiles
+            services.AddSpaStaticFiles(config => {
+                config.RootPath = "dist";
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -24,16 +31,30 @@ namespace ViteApi
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+
+                //允许跨域
+                //app.UseCors(builder => builder.AllowAnyHeader().AllowAnyHeader().AllowAnyOrigin());
             }
 
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                // endpoints.MapGet("/", async context =>
+                // {
+                //     await context.Response.WriteAsync("Hello World!");
+                // });
+                endpoints.MapDefaultControllerRoute();
+            });
+
+            //app.UseStaticFiles()改为UseSpaStaticFiles()
+            app.UseSpaStaticFiles();
+
+            //转到代理服务器前端地址
+            app.UseSpa(builder =>{
+                if(env.IsDevelopment()){
+                    builder.UseProxyToSpaDevelopmentServer("http://localhost:3000/");
+                }
             });
         }
     }

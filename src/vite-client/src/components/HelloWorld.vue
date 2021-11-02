@@ -1,15 +1,28 @@
 <script setup>
 import { ref } from 'vue'
+// `defineProps` is a compiler macro and no longer needs to be imported.
+import {defineProps, reactive} from 'vue'
 
 defineProps({
   msg: String
 })
+
+const state = reactive({
+  count:0,
+  message: 'empty'
+})
+
+//TestController
+fetch('http://localhost:5000/test')
+  .then(res=>res.text())
+  .then(t => state.message = t)
 
 const count = ref(0)
 </script>
 
 <template>
   <h1>{{ msg }}</h1>
+  <h1>{{ state.message }}</h1>
 
   <p>
     Recommended IDE setup:
@@ -26,7 +39,7 @@ const count = ref(0)
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Documentation</a>
   </p>
 
-  <button type="button" @click="count++">count is: {{ count }}</button>
+  <button type="button" @click="state.count++">count is: {{ state.count }}</button>
   <p>
     Edit
     <code>components/HelloWorld.vue</code> to test hot module replacement.
