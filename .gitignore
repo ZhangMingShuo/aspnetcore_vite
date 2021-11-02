@@ -1,4 +1,8 @@
-src/vite-client/node_modules
 src/vite-client/.vscode
 src/ViteApi/bin
 src/ViteApi/obj
+src/vite-client/node_modules
+src/vite-client/.DS_Store
+src/vite-client/dist
+src/vite-client/dist-ssr
+src/vite-client/*.local
