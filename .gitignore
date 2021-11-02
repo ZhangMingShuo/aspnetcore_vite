@@ -1,0 +1,4 @@
+src/vite-client/node_modules
+src/vite-client/.vscode
+src/ViteApi/bin
+src/ViteApi/obj
